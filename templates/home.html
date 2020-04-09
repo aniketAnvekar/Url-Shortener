@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}
+URL SHORTENER
+{% endblock %}
+
+{% block main %}
+
+<main role="main">
+
+{% for msg in get_flashed_messages() %}
+<br />
+<div class="container text-center">
+  <div class="p-3 mb-2 bg-danger text-white">{{ msg }}</div>
+</div>
+<br />
+{% endfor %}
+
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col-sm">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+    <form  action="your-url" method="post">
+      <h3>For websites</h3>
+      <label for="url">Website Url:</label>
+      <input type="url" name="url" value="" required>
+      <br />
+      <br />
+      <label for="code">Short name:</label>
+      <input type="text" name="code" value="" required>
+      <br />
+      <br />
+      <button class="btn btn-large btn-primary" type="submit">Shorten</button>
+      </form>
+    </div>
+  </div>
+    </div>
+      <br />
+      <br />
+
+      <div class="col-sm">
+      <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+      <form  action="your-url" method="post" enctype="multipart/form-data">
+        <h3>For files</h3>
+        <label for="file">File:</label>
+        <input type="file" name="file" value="" required>
+        <br />
+        <br />
+        <label for="code">Short name:</label>
+        <br />
+        <input type="text" name="code" value="" required>
+        <br />
+        <br />
+        <button class="btn btn-large btn-primary" type="submit">Shorten</button>
+        </form>
+      </div>
+      </div>
+      </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+{% if codes %}
+
+<h2>Codes our users have created</h2>
+<ul>
+  {% for c in codes %}
+  <a href="{{ url_for('urlshort.redirect_to_url',code=c) }}">
+  <li>{{ c }}</li>
+  </a>
+  {%endfor %}
+  </ul>
+
+{% endif %}
+
+</main>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+URL for {{ code }}
+{% endblock %}
+
+
+{% block main %}
+<h2>Your Url</h2>
+<a href="{{ url_for('urlshort.redirect_to_url',code=code) }}" >{{ code }} </a>
+
+{% endblock %}
